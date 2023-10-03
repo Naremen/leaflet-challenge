@@ -23,7 +23,7 @@ d3.json(challengeq).then(function (data) {
         if (params == 0) {
             return 1;
         }
-        return params * 5;
+        return params * 3;
 
     }
 
@@ -91,6 +91,13 @@ d3.json(challengeq).then(function (data) {
 
     legend.onAdd = function () {
         let div = L.DomUtil.create('div', 'legend');
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (let i = 0; i < magnitude.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + coloring(i) + '"></i> ' +
+                magnitude[i] + (magnitude[i + 1] ? '&ndash;' + magnitude[i + 1] + '<br>' : '+');
+        }
 
         return div;
     }
